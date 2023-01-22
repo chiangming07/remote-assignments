@@ -38,6 +38,7 @@ main {
   height: 200px;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 .section {
   display: flex;
@@ -76,6 +77,7 @@ main {
   background-color: rgb(224, 237, 253);
   text-align: center;
   line-height: 50px;
+  cursor: pointer;
 }
 .button p {
   margin: 0;

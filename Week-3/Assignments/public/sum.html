@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <section>
+      <h1>計算 1 到 N 總和</h1>
+      <form>
+        <label>N=</label>
+        <input type="text" placeholder="number" />
+        <button type="button">計算</button>
+      </form>
+      <div id="result"></div>
+    </section>
+
+    <script>
+      let xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4 && xhr.status == 200) {
+          let { sum } = JSON.parse(xhr.responseText);
+          document.getElementById("result").textContent = `總和是 ${sum}`;
+          console.log(sum);
+        }
+      };
+      let button = document.querySelector("button");
+      button.addEventListener("click", () => {
+        let input = document.querySelector("input").value;
+        xhr.open("GET", `http://localhost:3000/data?number=${input}`);
+        xhr.send();
+      });
+    </script>
+  </body>
+</html>
