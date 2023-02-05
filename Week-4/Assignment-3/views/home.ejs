@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up & Sign In</title>
+    <link href="style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="signUpBox">
+      <h1>Join Now</h1>
+      <form method="post" action="/signup" class="signUp">
+        <input type="email" name="email" id="emailSignUp" placeholder="Email" />
+        <input
+          type="password"
+          name="password"
+          id="passwordSignUp"
+          placeholder="Password"
+        />
+        <button type="submit" name="signUp" class="signUpBtn">Submit</button>
+        <div>
+          <div id="errorSignUp">Email is already registered</div>
+        </div>
+      </form>
+    </div>
+    <div class="signInBox">
+      <h1>Sign In</h1>
+      <form method="post" action="/signin" class="signIn">
+        <input type="email" name="email" id="emailSignIn" placeholder="Email" />
+        <input
+          type="password"
+          name="password"
+          id="passwordSignIn"
+          placeholder="Password"
+        />
+        <button type="submit" name="signin" class="signInBtn">Submit</button>
+        <div>
+          <div id="errorSignIn">Incorrect email or password</div>
+        </div>
+      </form>
+    </div>
+    <script>
+      //signup
+      let btnSignUp = document.querySelector(".signUpBtn");
+      btnSignUp.addEventListener("click", async (e) => {
+        e.preventDefault();
+        let email = document.querySelector("#emailSignUp").value;
+        let password = document.querySelector("#passwordSignUp").value;
+        const data = { email, password };
+        const response = await fetch("/signup", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        });
+        const result = await response.json();
+        const { error, msg } = result;
+        if (error) {
+          let message = document.querySelector("#errorSignUp");
+          message.style.display = "block";
+        } else {
+          window.location.href = "/member";
+        }
+      });
+      //signin
+      let btnSignIn = document.querySelector(".signInBtn");
+      btnSignIn.addEventListener("click", async (e) => {
+        e.preventDefault();
+        let email = document.querySelector("#emailSignIn").value;
+        let password = document.querySelector("#passwordSignIn").value;
+        const data = { email, password };
+        const response = await fetch("/signin", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        });
+        const result = await response.json();
+        const { error, msg } = result;
+        if (error) {
+          let message = document.querySelector("#errorSignIn");
+          message.style.display = "block";
+        } else {
+          window.location.href = "/member";
+        }
+      });
+    </script>
+  </body>
+</html>
