@@ -17,7 +17,7 @@ delayedResult(-5, 10, 2000, function (result) {
 
 //B. promise
 function delayedResultPromise(n1, n2, delayTime) {
-  new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     setTimeout(() => resolve(n1 + n2), delayTime);
   });
 }
